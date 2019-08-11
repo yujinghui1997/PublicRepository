@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.CacheMapper">
+ 	
+ 	<!--  添加商品--> 
+ 	<insert id="addCache">
+ 		insert into t_cache(id,type,name,uid) values(null,#{type},#{name},#{uid})
+ 	</insert>
+  
+  	<!-- 查询用户所有缓存 -->
+  	<select id="queryAllCache" resultType="com.store.Entity.Cache">
+		select * from t_cache where uid =#{uid}  	
+  	</select>
+  	
+  	
+  	<!-- 查询用户单个缓存 -->
+  	<select id="queryOneCache" resultType="com.store.Entity.Cache">
+		select * from t_cache where uid =#{uid} and type=#{type}	  
+  	</select>
+  	
+  	<!--  修改用户缓存-->
+  	<update id="updateCache">
+  		update t_cache set name=#{name} where type=#{type} and uid=#{uid} 
+  	</update>
+  	
+  	<!-- 删除用户的缓存 -->
+  	<delete id="deleteCache">
+  		delete from t_cache where uid=#{uid} 
+  	</delete>
+  	
+</mapper>

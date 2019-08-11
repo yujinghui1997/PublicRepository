@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.ShopMapper">
+ 	
+ 	<!--  添加商品--> 
+ 	<insert id="addShop">
+ 		insert into t_shop(id,photo,title,txt,price,content,state,uid) values(null,#{photo},#{title},#{txt},#{price},#{content},#{state},#{uid})
+ 	</insert>
+  
+  	<!-- 查询所有用户的商品 -->
+  	<select id="queryAllShop" resultType="com.store.Entity.Shop">
+  		select * from t_shop where uid=#{uid}
+  	</select>
+  	
+  	<!-- 查询所有商品 -->
+  	<select id="queryAll" resultType="com.store.Entity.Shop">
+  		select * from t_shop where state="unfinish"
+  	</select>
+  	
+  	
+  	<!-- 查询单个商品 -->
+  	<select id="queryOneShop" resultType="com.store.Entity.Shop">
+  		select * from t_shop where id=#{id}
+  	</select>
+  	
+  	<!-- 下架商品 -->
+  	<update id="downShop">
+  		update t_shop set state="finish" 
+  		where id in
+  		<foreach collection="ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+  	</update>
+  	
+</mapper>

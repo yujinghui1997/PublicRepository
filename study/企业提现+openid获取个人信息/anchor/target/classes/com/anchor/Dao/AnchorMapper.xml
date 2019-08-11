@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anchor.Dao.AnchorMapper">
+
+	<!-- 新增主播信息 -->
+	<insert id="addAnchor">
+		insert into
+		t_anchor(id,realname,vxnumber,hsnickname,hsnumber,uid)
+		values(null,#{realName},#{vxNumber},#{hsNickname},#{hsNumber},#{uid})
+	</insert>
+
+
+	<!-- 查询主播 通过 火山昵称 -->
+	<select id="queryByTiao" resultType="com.anchor.Entity.Anchor"
+		parameterType="com.anchor.Entity.Anchor">
+		select * from t_anchor where
+		<if test="id neq null">
+			id=#{id}
+		</if>
+		<if test="realName neq null">
+			realname=#{realName}
+		</if>
+		<if test="vxNumber neq null">
+			vxNumber=#{vxNumber}
+		</if>
+		<if test="hsNickname neq null">
+			hsnickname=#{hsNickname}
+		</if>
+		<if test="hsNumber neq null">
+			hsNumber=#{hsNumber}
+		</if>
+		<if test="uid neq null">
+			uid=#{uid}
+		</if>
+	</select>
+
+
+	<!-- 修改用户的 身份 为 主播 -->
+	<update id="updateType">
+		update t_user set type=#{type} where phone=#{phone}
+	</update>
+	
+	<update id="updatePhoneById">
+		update t_user set phone=#{phone} where id=#{id}
+	</update>
+	
+	<update id="updateHsNicknameByUid">
+		update t_anchor set hsnickname=#{hsNickname} where uid=#{uid}
+	</update>
+</mapper>

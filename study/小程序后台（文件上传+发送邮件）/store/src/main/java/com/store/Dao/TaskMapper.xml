@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.TaskMapper">
+ 	
+ 	<!--  添加任务--> 
+ 	<insert id="addTask">
+ 		insert into t_Task(id,photo,title,txt,price,content,state,uid) values(null,#{photo},#{title},#{txt},#{price},#{content},#{state},#{uid})
+ 	</insert>
+  
+  	<!-- 查询所有用户的任务 -->
+  	<select id="queryAllTask" resultType="com.store.Entity.Task">
+  		select * from t_task where uid=#{uid}
+  	</select>
+  	
+  	<!-- 查询所有任务 -->
+  	<select id="queryAll" resultType="com.store.Entity.Task">
+  		select * from t_Task where state="unfinish"
+  	</select>
+  	
+  	
+  	<!-- 查询单个任务 -->
+  	<select id="queryOneTask" resultType="com.store.Entity.Task">
+  		select * from t_Task where id=#{id}
+  	</select>
+  	
+  	<!-- 关闭任务 -->
+  	<update id="updateTask">
+  		update t_Task set state="finish" where id=#{id}
+  	</update>
+  	
+</mapper>

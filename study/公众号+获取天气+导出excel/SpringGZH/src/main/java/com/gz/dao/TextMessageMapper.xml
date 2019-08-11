@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gz.dao.TextMessageMapper">
+
+	<!-- 新增 -->
+	<insert id="addText">
+		insert into t_textmessage (id,ToUserName,FromUserName,CreateTime,MsgType,Content,MsgId)
+		values(null,#{ToUserName},#{FromUserName},#{CreateTime},#{MsgType},#{Content},#{MsgId})
+	</insert>
+	
+	<!--  查询所有信息-->
+	<select id="getAllTextMessage" resultType="com.gz.entity.TextMessage" >
+		select * from t_textmessage
+	</select>
+</mapper>

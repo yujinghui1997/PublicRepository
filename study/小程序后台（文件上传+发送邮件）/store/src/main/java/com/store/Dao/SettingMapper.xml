@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.SettingMapper">
+  	<!--  修改用户密码-->
+  	<update id="updatePassword">
+  		update t_user set password=#{newpass} where id=#{id} and password=#{oldpass} 
+  	</update>
+  	
+  	
+  	
+  	<!--  修改用户密码-->
+  	<update id="updateName">
+  		update t_user set name=#{name} where id=#{id}
+  	</update>
+  	
+  	
+  	
+</mapper>

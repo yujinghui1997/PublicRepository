@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.UserMapper">
+ 	
+ 	<!--  添加用户--> 
+ 	<insert id="addUser">
+ 		insert into t_user(id,name,email,password,money) values(null,#{name},#{email},#{password},#{money})
+ 	</insert>
+  
+  	<!-- 通过邮箱查询用户 -->
+  	<select id="queryUserByEmail" resultType="com.store.Entity.User">
+  		select * from t_user where email=#{email}
+  	</select>
+  	
+  	<!-- 登录 -->
+  	<select id="login" resultType="com.store.Entity.User">
+  		select * from t_user where email=#{email} and password=#{password}
+  	</select>
+  	
+  	<!-- id 查询用户 -->
+  	<select id="queryById" resultType="com.store.Entity.User">
+  		select * from t_user where id=#{id}
+  	</select>
+  	
+  	<!-- 修改用户的金钱 -->
+  	<update id="updateMoney">
+  		update t_user set money=money+#{money} where id=#{uid}
+  	</update>
+  	
+</mapper>

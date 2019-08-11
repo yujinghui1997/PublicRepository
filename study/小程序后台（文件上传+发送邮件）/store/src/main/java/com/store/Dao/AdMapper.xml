@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.Dao.AdMapper">
+ 	
+ 	<!--  添加广告--> 
+ 	<insert id="addAd">
+ 		insert into t_Ad(id,photo,title,txt,content,state,uid) values(null,#{photo},#{title},#{txt},#{content},#{state},#{uid})
+ 	</insert>
+  
+  	<!-- 查询所有用户的广告 -->
+  	<select id="queryAllAd" resultType="com.store.Entity.Ad">
+  		select * from t_Ad where uid=#{uid} 
+  	</select>
+  	
+  	<!-- 查询所有广告 -->
+  	<select id="queryAll" resultType="com.store.Entity.Ad">
+  		select * from t_Ad where state="unfinish"
+  	</select>
+  	
+  	
+  	<!-- 查询单个广告 -->
+  	<select id="queryOneAd" resultType="com.store.Entity.Ad">
+  		select * from t_Ad where id=#{id}
+  	</select>
+  	
+  	
+  	
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anchor.Dao.AdminMapper">
+
+	<!-- 管理员登录 -->
+	<select id="login" resultType="com.anchor.Entity.Admin">
+		select * from t_admin where username=#{username} and password=#{password}
+	</select>
+	
+	
+	<!-- 管理员登录 -->
+	<select id="queryById" resultType="com.anchor.Entity.Admin">
+		select * from t_admin where id=#{id}
+	</select>
+	
+	
+	
+	<!--  删除 主播 user表-->
+	<delete id="deleteUser">
+		delete  from t_user where  id=#{id};
+	</delete>
+	
+	<!--  删除 主播 wallet表-->
+	<delete id="deleteWallet">
+		delete  from t_wallet where  uid=#{id};
+	</delete>
+	
+	<!--  删除 主播 anchor表-->
+	<delete id="deleteAnchor">
+		delete  from t_anchor where  uid=#{id};
+	</delete>
+	
+	<!--  删除 主播 log表-->
+	<delete id="deleteLog">
+		delete  from t_log where  uid=#{id};
+	</delete>
+	
+	<update id="updateWalletState">
+		update t_wallet set state=#{state} where uid=#{uid}
+	</update>
+	
+	
+	<!-- 查询所有主播 -->
+	<select id="queryAll" resultType="com.anchor.Entity.AnchorMes">
+		SELECT u.id,a.realname,u.`phone`,a.`vxnumber`,a.`hsnickname`,a.`hsnumber`,w.`money`,w.`state` 
+		FROM t_user AS u ,t_wallet AS w,t_anchor AS a 
+		WHERE u.`type`='anchor' AND u.`id`=a.`uid` AND u.`id`=w.`uid` LIMIT #{page},#{count}
+	</select>
+	
+	
+	<!-- 查询所有主播  搜索姓名-->
+	<select id="queryAllSouName" resultType="com.anchor.Entity.AnchorMes">
+		SELECT u.id,a.realname,u.`phone`,a.`vxnumber`,a.`hsnickname`,a.`hsnumber`,w.`money`,w.`state` 
+		FROM t_user AS u ,t_wallet AS w,t_anchor AS a 
+		WHERE u.`type`='anchor' AND u.`id`=a.`uid` AND u.`id`=w.`uid` AND a.realname LIKE #{data} LIMIT #{page},#{count}
+	</select>
+	
+	
+	<!-- 查询所有主播 搜索手机号-->
+	<select id="queryAllSouPhone" resultType="com.anchor.Entity.AnchorMes">
+		SELECT u.id,a.realname,u.`phone`,a.`vxnumber`,a.`hsnickname`,a.`hsnumber`,w.`money`,w.`state` 
+		FROM t_user AS u ,t_wallet AS w,t_anchor AS a 
+		WHERE u.`type`='anchor' AND u.`id`=a.`uid` AND u.`id`=w.`uid` AND u.phone LIKE #{data} LIMIT #{page},#{count}
+	</select>
+	
+	
+	
+	<!-- 查询最大页数 -->
+	<select id="queryMaxPage" resultType="java.lang.Integer">
+		select count(*) from t_anchor
+	</select>
+	
+	<!-- 查询最大页数 -->
+	<select id="queryMaxPageName" resultType="java.lang.Integer">
+		select count(*) from t_anchor where realname  LIKE #{data}
+	</select>
+	
+	<!-- 查询最大页数 -->
+	<select id="queryMaxPagePhone" resultType="java.lang.Integer">
+		select count(*) from t_user where phone LIKE #{data}
+	</select>
+	
+	<!-- 查询 每个人提现的 总额 -->
+	<select id="querySumMoney" resultType="com.anchor.Entity.Log">
+		SELECT SUM(tiXian) AS tixian ,uid FROM t_log GROUP BY uid
+	</select>
+	
+	<update id="updataSessionId">
+		update t_admin set sessionid=#{sessionId} where username=#{username} and password=#{password}
+	</update>
+</mapper>
+  

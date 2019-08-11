@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anchor.Dao.WalletMapper">
+	<!-- 通过uid查询用户的钱包 -->
+	<select id="queryByUid" resultType="com.anchor.Entity.Wallet">
+		select * from t_wallet where uid=#{uid}
+	</select>
+	
+	<!-- 新增钱包 -->
+	<insert id="addWallet">
+		insert into t_wallet (id,money,uid) values(null,#{money},#{uid})
+	</insert>
+	
+	<update id="updateUserMoney">
+		update t_wallet set money=money-#{money} where uid=#{uid}
+	</update>
+</mapper>
