@@ -171,7 +171,7 @@
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
-			<version>1.4.0</version>
+			<version>1.4.2</version>
 		</dependency>
 
 		<!-- 用于微信小程序登录 请求微信服务器 -->
